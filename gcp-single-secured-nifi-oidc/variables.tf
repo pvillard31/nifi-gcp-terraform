@@ -1,15 +1,3 @@
-variable "project" {
-    default = "nifi-dev-project"
-}
-
-variable "region" {
-    default = "europe-west1"
-}
-
-variable "zone" {
-    default = "europe-west1-d"
-}
-
 variable network_name {
   default = "nifi-network"
 }
@@ -24,6 +12,25 @@ variable nifi-ca-hostname {
 
 variable nifi-hostname {
   default = "nifi"
+}
+
+variable nifi-basedir {
+  default = "/opt/nifi"
+}
+
+// ---------------------------------
+// To update before running 'terraform apply'
+
+variable "project" {
+    default = "nifi-dev-project"
+}
+
+variable "region" {
+    default = "europe-west1"
+}
+
+variable "zone" {
+    default = "europe-west1-d"
 }
 
 variable nifi-admin {
