@@ -1,28 +1,29 @@
 variable network_name {
-  default = "nifi-network"
+    default = "nifi-network"
 }
 
 variable nifi-ca-hostname {
-  default = "nifi-ca"
+    default = "nifi-ca"
 }
 
 variable nifi-hostname {
-  default = "nifi"
+    default = "nifi"
 }
 
 variable nifi-basedir {
-  default = "/opt/nifi"
+    default = "/opt/nifi"
 }
 
-// ---------------------------------
-// To update before running 'terraform apply'
+variable nifi-machine-type {
+    default = "n1-highcpu-4"
+}
+
+variable nifi-ca-machine-type {
+    default = "f1-micro"
+}
 
 variable nifi_version {
-  default = "1.9.2"
-}
-
-variable "project" {
-    default = "nifi-dev-project"
+    default = "1.9.2"
 }
 
 variable "region" {
@@ -33,30 +34,32 @@ variable "zone" {
     default = "europe-west1-d"
 }
 
+// ---------------------------------
+
+variable "project" {
+    description = "GCP Project ID"
+}
+
 variable nifi-admin {
-  default = "admin@pierrevillard.com"
+    description = "Google mail address for the user that will be the initial admin in NiFi"
 }
 
 variable san {
-  default = "nifi.pierrevillard.com"
+    description = "FQDN of the DNS mapping for that will be used to access NiFi. Example: nifi.example.com"
 }
 
 variable proxyhost {
-  default = "nifi.pierrevillard.com:8443"
+    description = "FQDN:port that will be used to access NiFi. Example: nifi.example.com:8443"
 }
 
-
-// ---------------------------------
-// Should be managed with Google KMS // TODO
-
 variable ca_token {
-  default = "ThisIsAVeryBadToken"
+    description = "The token to use to prevent MITM between the NiFi CA client and the NiFi CA server (must be at least 16 bytes long)"
 }
 
 variable oauth_clientid {
-  default = "578021925232-jp57srf2jr3nchc4mpa3e985ot5if5eq.apps.googleusercontent.com"
+    description = "OAuth Client ID"
 }
 
 variable oauth_secret {
-  default = "-gUemdA2NpaJ8I9CwjYkB1Rn"
+    description = "OAuth Client secret"
 }

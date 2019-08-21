@@ -1,6 +1,6 @@
 resource "google_compute_instance" "nifi-ca" {
     name         = "${var.nifi-ca-hostname}"
-    machine_type = "f1-micro"
+    machine_type = "${var.nifi-ca-machine-type}"
 
     tags = ["nifi-ca"]
     

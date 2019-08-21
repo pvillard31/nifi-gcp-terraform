@@ -4,7 +4,7 @@ resource "google_compute_address" "static" {
 
 resource "google_compute_instance" "nifi" {
     name         = "${var.nifi-hostname}"
-    machine_type = "n1-highcpu-4"
+    machine_type = "${var.nifi-machine-type}"
 
     depends_on = [google_compute_instance.nifi-ca]
 
