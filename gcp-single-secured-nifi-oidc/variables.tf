@@ -2,10 +2,6 @@ variable network_name {
   default = "nifi-network"
 }
 
-variable nifi_version {
-  default = "1.9.2"
-}
-
 variable nifi-ca-hostname {
   default = "nifi-ca"
 }
@@ -20,6 +16,10 @@ variable nifi-basedir {
 
 // ---------------------------------
 // To update before running 'terraform apply'
+
+variable nifi_version {
+  default = "1.9.2"
+}
 
 variable "project" {
     default = "nifi-dev-project"
