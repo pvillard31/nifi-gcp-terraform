@@ -2,6 +2,11 @@
 
 Step-by-step guide to start a secured NiFi instance configured with OpenID Connect using Terraform on the Google Cloud Platform. Please refer to the [Medium post](https://medium.com/@pierre.villard/nifi-with-oidc-using-terraform-on-the-google-cloud-platform-8686ac247ee9) to get more details.
 
+It will:
+  * deploy a NiFi CA server as a convenient way to generate SSL certificates
+  * deploy a single secured NiFi instance mapped to a domain
+  * configure NiFi to use OpenID connect for authentication
+
 ````
 git clone https://github.com/pvillard31/nifi-gcp-terraform.git
 cd nifi-gcp-terraform/gcp-single-secured-nifi-oidc/
