@@ -23,7 +23,7 @@ variable nifi-ca-machine-type {
 }
 
 variable nifi_version {
-    default = "1.9.2"
+    default = "1.10.0"
 }
 
 variable "region" {
