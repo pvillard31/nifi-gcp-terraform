@@ -81,5 +81,5 @@ variable "instance_count" {
 }
 
 variable nifi_bucket {
-    description = "GCS path to the bucket containing the binaries (ex: gs://nifi_bin)
+    description = "GCS path to the bucket containing the binaries (ex: gs://nifi_bin)"
 }
