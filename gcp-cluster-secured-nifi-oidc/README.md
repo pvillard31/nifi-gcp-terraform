@@ -4,7 +4,7 @@ Step-by-step guide to start a secured NiFi cluster configured with OpenID Connec
 
 It will:
   * deploy a NiFi CA server as a convenient way to generate SSL certificates
-  * deploy a Zookeeper server to manage cluster coordination and state across the nodes
+  * deploy an external ZooKeeper instance to manage cluster coordination and state across the nodes
   * deploy X secured NiFi instances clustered together
   * configure NiFi to use OpenID connect for authentication
   * configure an HTTPS load balancer with Client IP affinity in front of the NiFi cluster
