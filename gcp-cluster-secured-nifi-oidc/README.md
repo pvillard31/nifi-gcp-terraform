@@ -25,3 +25,4 @@ Variables to update in ``variables.tf`` **before**:
 * **oauth_clientid** // OAuth Client ID
 * **oauth_secret** // OAuth Client secret
 * **instance_count** // Number of NiFi instances to create
+* **nifi_bucket** // GCS path to the bucket containing the binaries (ex: gs://nifi_bin)

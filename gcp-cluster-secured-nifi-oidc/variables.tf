@@ -38,10 +38,6 @@ variable nifi_toolkit_version {
     default = "1.9.2"
 }
 
-variable nifi_bucket {
-    default = "gs://nifi_bin"
-}
-
 variable "region" {
     default = "europe-west1"
 }
@@ -82,4 +78,8 @@ variable oauth_secret {
 
 variable "instance_count" {
     description = "Number of NiFi instances"
+}
+
+variable nifi_bucket {
+    description = "GCS path to the bucket containing the binaries (ex: gs://nifi_bin)
 }
