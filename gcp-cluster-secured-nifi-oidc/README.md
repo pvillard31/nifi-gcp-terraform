@@ -15,6 +15,8 @@ cd nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc/
 /bin/sh deploy.sh <projectID> <bucket>
 ````
 
+Please note that you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment.
+
 Variables to update in ``variables.tf`` **before**:
 
 * **project** // GCP Project ID
@@ -26,3 +28,9 @@ Variables to update in ``variables.tf`` **before**:
 * **oauth_secret** // OAuth Client secret
 * **instance_count** // Number of NiFi instances to create
 * **nifi_bucket** // GCS path to the bucket containing the binaries (ex: gs://nifi_bin)
+
+Once you are done, you can execute:
+
+````
+terraform destroy
+````

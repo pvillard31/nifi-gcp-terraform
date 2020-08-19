@@ -30,12 +30,16 @@ variable zookeeper-machine-type {
     default = "f1-micro"
 }
 
+variable zookeeper_version {
+    default = "3.5.8"
+}
+
 variable nifi_version {
-    default = "1.10.0"
+    default = "1.12.0"
 }
 
 variable nifi_toolkit_version {
-    default = "1.9.2"
+    default = "1.12.0"
 }
 
 variable "region" {

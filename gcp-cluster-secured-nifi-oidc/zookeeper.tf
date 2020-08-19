@@ -35,17 +35,17 @@ resource "google_compute_instance" "zookeeper" {
             && chown -R zookeeper:zookeeper /opt/zookeeper \
             && chown -R zookeeper:zookeeper /var/lib/zookeeper
 
-        gsutil cp ${var.nifi_bucket}/apache-zookeeper-3.5.5-bin.tar.gz /opt/zookeeper/.
-        chown zookeeper:zookeeper /opt/zookeeper/apache-zookeeper-3.5.5-bin.tar.gz
-        su zookeeper -c 'cd /opt/zookeeper/ && tar -xvzf /opt/zookeeper/apache-zookeeper-3.5.5-bin.tar.gz'
-        su zookeeper -c 'rm /opt/zookeeper/apache-zookeeper-3.5.5-bin.tar.gz'
+        gsutil cp ${var.nifi_bucket}/apache-zookeeper-${var.zookeeper_version}-bin.tar.gz /opt/zookeeper/.
+        chown zookeeper:zookeeper /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin.tar.gz
+        su zookeeper -c 'cd /opt/zookeeper/ && tar -xvzf /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin.tar.gz'
+        su zookeeper -c 'rm /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin.tar.gz'
 
-        echo "tickTime=2000" > /opt/zookeeper/apache-zookeeper-3.5.5-bin/conf/zoo.cfg
-        echo "dataDir=/var/lib/zookeeper" >> /opt/zookeeper/apache-zookeeper-3.5.5-bin/conf/zoo.cfg
-        echo "clientPort=2181" >> /opt/zookeeper/apache-zookeeper-3.5.5-bin/conf/zoo.cfg
-        chown zookeeper:zookeeper /opt/zookeeper/apache-zookeeper-3.5.5-bin/conf/zoo.cfg
+        echo "tickTime=2000" > /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin/conf/zoo.cfg
+        echo "dataDir=/var/lib/zookeeper" >> /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin/conf/zoo.cfg
+        echo "clientPort=2181" >> /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin/conf/zoo.cfg
+        chown zookeeper:zookeeper /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin/conf/zoo.cfg
 
-        su zookeeper -c 'cd /home/zookeeper && /opt/zookeeper/apache-zookeeper-3.5.5-bin/bin/zkServer.sh start'
+        su zookeeper -c 'cd /home/zookeeper && /opt/zookeeper/apache-zookeeper-${var.zookeeper_version}-bin/bin/zkServer.sh start'
 
     EOF
 
