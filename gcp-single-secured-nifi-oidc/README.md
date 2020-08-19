@@ -14,6 +14,8 @@ terraform init
 terraform apply
 ````
 
+Please note that you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment.
+
 Variables to provide:
 
 * **project** // GCP Project ID
@@ -23,3 +25,9 @@ Variables to provide:
 * **ca_token** // The token to use to prevent MITM between the NiFi CA client and the NiFi CA server (must be at least 16 bytes long)
 * **oauth_clientid** // OAuth Client ID
 * **oauth_secret** // OAuth Client secret
+
+Once you are done, you can execute:
+
+````
+terraform destroy
+````
