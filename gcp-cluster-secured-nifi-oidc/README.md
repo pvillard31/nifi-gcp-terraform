@@ -15,7 +15,9 @@ cd nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc/
 /bin/sh deploy.sh <projectID> <bucket>
 ````
 
-Please note that you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment.
+Requirements:
+  * you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment
+  * you need to have nifi-1.12.1-bin.zip, nifi-toolkit-1.12.1-bin.zip and apache-zookeeper-3.5.8-bin.tar.gz in the configured GCS bucket
 
 Variables to update in ``variables.tf`` **before**:
 
