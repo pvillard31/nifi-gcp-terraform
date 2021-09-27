@@ -31,15 +31,15 @@ variable zookeeper-machine-type {
 }
 
 variable zookeeper_version {
-    default = "3.5.8"
+    default = "3.6.3"
 }
 
 variable nifi_version {
-    default = "1.12.1"
+    default = "1.14.0"
 }
 
 variable nifi_toolkit_version {
-    default = "1.12.1"
+    default = "1.14.0"
 }
 
 variable "region" {
@@ -86,4 +86,8 @@ variable "instance_count" {
 
 variable nifi_bucket {
     description = "GCS path to the bucket containing the binaries (ex: gs://nifi_bin)"
+}
+
+variable sensitivepropskey {
+    description = "Key that will be used for encrypting the sensitive properties in the flow definition (ex: ThisIsAVeryBadPass3word)"
 }

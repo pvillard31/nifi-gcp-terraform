@@ -17,7 +17,7 @@ cd nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc/
 
 Requirements:
   * you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment
-  * you need to have nifi-1.12.1-bin.zip, nifi-toolkit-1.12.1-bin.zip and apache-zookeeper-3.5.8-bin.tar.gz in the configured GCS bucket
+  * you need to have nifi-1.14.0-bin.zip, nifi-toolkit-1.14.0-bin.zip and apache-zookeeper-3.6.3-bin.tar.gz in the configured GCS bucket
 
 Variables to update in ``variables.tf`` **before**:
 
@@ -25,11 +25,12 @@ Variables to update in ``variables.tf`` **before**:
 * **nifi-admin** // Google mail address for the user that will be the initial admin in NiFi
 * **san** // FQDN of the DNS mapping for that will be used to access NiFi. Example: nifi.example.com
 * **proxyhost** // FQDN:port that will be used to access NiFi. Example: nifi.example.com:8443
-* **ca_token** // The token to use to prevent MITM between the NiFi CA client and the NiFi CA server (must be at least 16 bytes long)
+* **ca_token** // The token to use to prevent MITM between the NiFi CA client and the NiFi CA server (must be at least 16 bytes long) (ex: ThisIsAVeryBadPass3word)
 * **oauth_clientid** // OAuth Client ID
 * **oauth_secret** // OAuth Client secret
 * **instance_count** // Number of NiFi instances to create
 * **nifi_bucket** // GCS path to the bucket containing the binaries (ex: gs://nifi_bin)
+* **sensitivepropskey** // Key that will be used for encrypting the sensitive properties in the flow definition (ex: ThisIsAVeryBadPass3word)
 
 Once you are done, you can execute:
 

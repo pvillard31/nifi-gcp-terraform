@@ -59,35 +59,39 @@ resource "google_compute_instance" "nifi" {
         KEY_PASSWORD=`jq -r '.keyPassword' /home/nifi/config.json`
         TRUSTSTORE_PASSWORD=`jq -r '.trustStorePassword' /home/nifi/config.json`
 
-        prop_replace 'nifi.security.keystore'           "/home/nifi/keystore.jks"               "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.security.keystoreType'       "JKS"                                   "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.security.keystorePasswd'     "$${KEYSTORE_PASSWORD}"                 "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.security.keyPasswd'          "$${KEY_PASSWORD}"                      "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.security.truststore'         "/home/nifi/truststore.jks"             "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.security.truststoreType'     "JKS"                                   "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.security.truststorePasswd'   "$${TRUSTSTORE_PASSWORD}"               "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.keystore'                       "/home/nifi/keystore.jks"                                           "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.keystoreType'                   "JKS"                                                               "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.keystorePasswd'                 "$${KEYSTORE_PASSWORD}"                                             "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.keyPasswd'                      "$${KEY_PASSWORD}"                                                  "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.truststore'                     "/home/nifi/truststore.jks"                                         "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.truststoreType'                 "JKS"                                                               "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.truststorePasswd'               "$${TRUSTSTORE_PASSWORD}"                                           "$${NIFI_CONFIG_FILE}"
 
-        prop_replace 'nifi.web.proxy.host'              '${var.proxyhost}'                      "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.web.http.port'               ''                                      "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.web.http.host'               ''                                      "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.web.https.port'              "$${NIFI_WEB_HTTPS_PORT:-8443}"         "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.web.https.host'              "$${NIFI_WEB_HTTPS_HOST:-$HOSTNAME}"    "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.remote.input.secure'         'true'                                  "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.sensitive.props.key'                     '${var.sensitivepropskey}'                                          "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.user.login.identity.provider'   ''                                                                  "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.user.authorizer'                'managed-authorizer'                                                "$${NIFI_CONFIG_FILE}"
+
+        prop_replace 'nifi.web.proxy.host'                          '${var.proxyhost}'                                                  "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.web.http.port'                           ''                                                                  "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.web.http.host'                           ''                                                                  "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.web.https.port'                          "$${NIFI_WEB_HTTPS_PORT:-8443}"                                     "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.web.https.host'                          "$${NIFI_WEB_HTTPS_HOST:-$HOSTNAME}"                                "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.remote.input.secure'                     'true'                                                              "$${NIFI_CONFIG_FILE}"
 
         prop_replace 'nifi.security.user.oidc.discovery.url'        'https://accounts.google.com/.well-known/openid-configuration'      "$${NIFI_CONFIG_FILE}"
         prop_replace 'nifi.security.user.oidc.client.id'            '${var.oauth_clientid}'                                             "$${NIFI_CONFIG_FILE}"
         prop_replace 'nifi.security.user.oidc.client.secret'        '${var.oauth_secret}'                                               "$${NIFI_CONFIG_FILE}"
 
-        prop_replace 'nifi.cluster.is.node'                         'true'                                  "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.cluster.protocol.is.secure'              'true'                                  "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.cluster.node.address'                    "$${NIFI_WEB_HTTPS_HOST:-$HOSTNAME}"    "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.cluster.node.protocol.port'              '9876'                                  "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.zookeeper.connect.string'                '${var.zookeeper-hostname}:2181'        "$${NIFI_CONFIG_FILE}"
-        prop_replace 'nifi.cluster.flow.election.max.wait.time'     '30 sec'                                "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.cluster.is.node'                         'true'                                                              "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.cluster.protocol.is.secure'              'true'                                                              "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.cluster.node.address'                    "$${NIFI_WEB_HTTPS_HOST:-$HOSTNAME}"                                "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.cluster.node.protocol.port'              '9876'                                                              "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.zookeeper.connect.string'                '${var.zookeeper-hostname}:2181'                                    "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.cluster.flow.election.max.wait.time'     '30 sec'                                                            "$${NIFI_CONFIG_FILE}"
 
-        sed -i -e 's|# nifi.security.identity.mapping.pattern.dn=.*|nifi.security.identity.mapping.pattern.dn=CN=(.*), OU=.*|'          $${NIFI_CONFIG_FILE}
-        sed -i -e 's|# nifi.security.identity.mapping.value.dn=.*|nifi.security.identity.mapping.value.dn=$1|'                          $${NIFI_CONFIG_FILE}
-        sed -i -e 's|# nifi.security.identity.mapping.transform.dn=NONE|nifi.security.identity.mapping.transform.dn=NONE|'              $${NIFI_CONFIG_FILE}
+        sed -i -e 's|# nifi.security.identity.mapping.pattern.dn=.*|nifi.security.identity.mapping.pattern.dn=CN=(.*), OU=.*|'                                          $${NIFI_CONFIG_FILE}
+        sed -i -e 's|# nifi.security.identity.mapping.value.dn=.*|nifi.security.identity.mapping.value.dn=$1|'                                                          $${NIFI_CONFIG_FILE}
+        sed -i -e 's|# nifi.security.identity.mapping.transform.dn=NONE|nifi.security.identity.mapping.transform.dn=NONE|'                                              $${NIFI_CONFIG_FILE}
 
         sed -i -e 's|<property name="Initial User Identity 1"></property>|<property name="Initial User Identity 0">'"${var.nifi-admin}"'</property>|'                   $${NIFI_AUTHZ_FILE}
         sed -i -e 's|<property name="Initial Admin Identity"></property>|<property name="Initial Admin Identity">'"${var.nifi-admin}"'</property>|'                     $${NIFI_AUTHZ_FILE}
@@ -100,6 +104,11 @@ resource "google_compute_instance" "nifi" {
         for i in $(seq 1 ${var.instance_count}); do
             sed -i -e '/<property name="Initial User Identity 0">.*/a <property name="Initial User Identity '"$i"'">'"${var.nifi-hostname}-$i"'</property>'             $${NIFI_AUTHZ_FILE}
         done
+
+        head -n -11 $${NIFI_AUTHZ_FILE} > /tmp/authorizers.xml
+        echo '</authorizers>' >> /tmp/authorizers.xml
+        mv /tmp/authorizers.xml $${NIFI_AUTHZ_FILE}
+        chown nifi:nifi $${NIFI_AUTHZ_FILE}        
 
         sed -i -e 's|<property name="Connect String"></property>|<property name="Connect String">'"${var.zookeeper-hostname}:2181"'</property>|'                        $${NIFI_STATE_FILE}
 

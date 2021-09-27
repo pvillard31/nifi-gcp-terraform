@@ -38,7 +38,7 @@ resource "google_compute_instance" "nifi-ca" {
         su nifi -c 'rm ${var.nifi-basedir}/nifi-toolkit-${var.nifi_toolkit_version}-bin.zip'
         su nifi -c 'cd /home/nifi && ${var.nifi-basedir}/nifi-toolkit-${var.nifi_toolkit_version}/bin/tls-toolkit.sh server -c ${var.nifi-ca-hostname} -t ${var.ca_token} &'
 
-        sleep 5
+        sleep 10
 
         cd /root
         ${var.nifi-basedir}/nifi-toolkit-${var.nifi_toolkit_version}/bin/tls-toolkit.sh client -D CN=nifi-lb,OU=NIFI -c ${var.nifi-ca-hostname} --subjectAlternativeNames ${var.san} -t ${var.ca_token}

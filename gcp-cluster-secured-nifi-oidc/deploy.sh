@@ -13,7 +13,7 @@ terraform init
 terraform apply -auto-approve -target=google_compute_instance.nifi-ca
 
 # wait until certificates are generated and pushed into GCS
-until gsutil ls gs://$BUCKET/key.pem; do
+until gsutil ls gs://$BUCKET/certs.pem; do
     sleep 1
 done
 
