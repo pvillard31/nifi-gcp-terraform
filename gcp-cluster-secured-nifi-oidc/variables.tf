@@ -10,6 +10,10 @@ variable zookeeper-hostname {
     default = "zookeeper"
 }
 
+variable registry-hostname {
+    default = "nifi-registry"
+}
+
 variable nifi-hostname {
     default = "nifi"
 }
@@ -19,15 +23,19 @@ variable nifi-basedir {
 }
 
 variable nifi-machine-type {
-    default = "n1-highcpu-4"
+    default = "e2-highcpu-4"
 }
 
 variable nifi-ca-machine-type {
-    default = "f1-micro"
+    default = "e2-micro"
 }
 
 variable zookeeper-machine-type {
-    default = "f1-micro"
+    default = "e2-micro"
+}
+
+variable registry-machine-type {
+    default = "e2-micro"
 }
 
 variable zookeeper_version {
@@ -35,6 +43,10 @@ variable zookeeper_version {
 }
 
 variable nifi_version {
+    default = "1.14.0"
+}
+
+variable nifiregistry_version {
     default = "1.14.0"
 }
 
@@ -61,7 +73,11 @@ variable nifi-admin {
 }
 
 variable san {
-    description = "FQDN of the DNS mapping for that will be used to access NiFi. Example: nifi.example.com"
+    description = "FQDN of the DNS mapping that will be used to access NiFi. Example: nifi.example.com"
+}
+
+variable san-registry {
+    description = "FQDN of the DNS mapping that will be used to access NiFi Registry. Example: nifiregistry.example.com"
 }
 
 variable proxyhost {

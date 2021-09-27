@@ -9,6 +9,7 @@ This repository is used to deploy NiFi instances using Terraform on the Google C
 * [gcp-cluster-secured-nifi-oidc](./gcp-cluster-secured-nifi-oidc) - Will:
   * deploy a NiFi CA server as a convenient way to generate SSL certificates
   * deploy an external ZooKeeper instance to manage cluster coordination and state across the nodes
+  * deploy one secured instance of the NiFi Registry configured with OIDC
   * deploy X secured NiFi instances clustered together
   * configure NiFi to use OpenID connect for authentication
   * configure an HTTPS load balancer with Client IP affinity in front of the NiFi cluster

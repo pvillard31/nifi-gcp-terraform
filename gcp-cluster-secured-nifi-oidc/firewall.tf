@@ -42,7 +42,7 @@ resource "google_compute_firewall" "allow-https" {
 
     allow {
         protocol = "tcp"
-        ports    = ["8443"]
+        ports    = ["8443", "18443"]
     }
 
     target_tags  = ["nifi"]
