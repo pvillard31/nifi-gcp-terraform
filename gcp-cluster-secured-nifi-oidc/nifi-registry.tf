@@ -30,7 +30,14 @@ resource "google_compute_instance" "nifi-registry" {
 
     metadata_startup_script =   <<EOF
 
-        apt-get update && apt-get install openjdk-8-jdk unzip jq -y
+        apt-get update && apt-get install unzip jq -y
+
+        apt-get -yq install gnupg curl dirmngr apt-transport-https
+        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
+        curl -O https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-2_all.deb
+        apt-get -y install ./zulu-repo_1.0.0-2_all.deb
+        apt-get update
+        apt-get -y install zulu11-jdk
 
         NIFIREGISTRY_UID=10000
         NIFIREGISTRY_GID=10000
