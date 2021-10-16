@@ -8,7 +8,7 @@ resource "google_compute_instance" "nifi" {
     tags = ["nifi"]
 
     service_account {
-        scopes = ["storage-ro"]
+        scopes = ["storage-ro", "cloud-platform"]
     }
     
     boot_disk {
