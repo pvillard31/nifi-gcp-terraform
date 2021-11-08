@@ -43,15 +43,15 @@ variable zookeeper_version {
 }
 
 variable nifi_version {
-    default = "1.14.0"
+    default = "1.15.0"
 }
 
 variable nifiregistry_version {
-    default = "1.14.0"
+    default = "1.15.0"
 }
 
 variable nifi_toolkit_version {
-    default = "1.14.0"
+    default = "1.15.0"
 }
 
 variable "region" {
