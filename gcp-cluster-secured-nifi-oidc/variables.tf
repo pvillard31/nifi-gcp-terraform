@@ -39,19 +39,19 @@ variable registry-machine-type {
 }
 
 variable zookeeper_version {
-    default = "3.6.3"
+    default = "3.8.1"
 }
 
 variable nifi_version {
-    default = "1.15.0"
+    default = "1.22.0"
 }
 
 variable nifiregistry_version {
-    default = "1.15.0"
+    default = "1.22.0"
 }
 
 variable nifi_toolkit_version {
-    default = "1.15.0"
+    default = "1.22.0"
 }
 
 variable "region" {
