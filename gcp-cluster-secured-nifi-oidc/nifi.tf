@@ -14,6 +14,7 @@ resource "google_compute_instance" "nifi" {
     boot_disk {
         initialize_params {
             image = "debian-cloud/debian-9"
+            size = 200
         }
     }
 
