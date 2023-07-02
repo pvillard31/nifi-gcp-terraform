@@ -2,6 +2,8 @@ resource "google_compute_instance" "nifi-ca" {
     name         = "${var.nifi-ca-hostname}"
     machine_type = "${var.nifi-ca-machine-type}"
 
+    depends_on = [google_compute_firewall.allow-ssh]
+
     tags = ["nifi-ca"]
 
     service_account {
@@ -27,7 +29,7 @@ resource "google_compute_instance" "nifi-ca" {
         echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
 
         apt update && apt install unzip jq -y
-        apt install zulu17-jdk
+        apt install zulu17-jdk -y
 
         NIFI_UID=10000
         NIFI_GID=10000
@@ -46,7 +48,7 @@ resource "google_compute_instance" "nifi-ca" {
         sleep 10
 
         cd /root
-        ${var.nifi-basedir}/nifi-toolkit-${var.nifi_toolkit_version}/bin/tls-toolkit.sh client -D CN=nifi-lb,OU=NIFI -c ${var.nifi-ca-hostname} --subjectAlternativeNames ${var.san} -t ${var.ca_token}
+        ${var.nifi-basedir}/nifi-toolkit-${var.nifi_toolkit_version}/bin/tls-toolkit.sh client -D "CN=nifi-lb, OU=NIFI" -c ${var.nifi-ca-hostname} --subjectAlternativeNames ${var.san} -t ${var.ca_token}
         KEYSTORE_PASSWORD=`jq -r '.keyStorePassword' /root/config.json`
         KEY_PASSWORD=`jq -r '.keyPassword' /root/config.json`
 
@@ -58,6 +60,13 @@ resource "google_compute_instance" "nifi-ca" {
         gsutil cp certs.pem ${var.nifi_bucket}/certs.pem
         
         rm nifi-cert.pem truststore.jks keystore.jks keystore.p12 key.pem certs.pem config.json
+
+        ${var.nifi-basedir}/nifi-toolkit-${var.nifi_toolkit_version}/bin/tls-toolkit.sh client -D "CN=${var.nifi-admin}, OU=NIFI" -c ${var.nifi-ca-hostname} -t ${var.ca_token}
+        gsutil cp truststore.jks ${var.nifi_bucket}/truststore.jks
+        gsutil cp keystore.jks ${var.nifi_bucket}/keystore.jks
+        gsutil cp config.json ${var.nifi_bucket}/config.json
+
+        rm nifi-cert.pem truststore.jks keystore.jks config.json
 
     EOF
 

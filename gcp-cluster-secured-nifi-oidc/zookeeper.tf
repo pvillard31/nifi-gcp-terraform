@@ -10,7 +10,7 @@ resource "google_compute_instance" "zookeeper" {
     
     boot_disk {
         initialize_params {
-            image = "debian-cloud/debian-9"
+            image = "debian-cloud/debian-11"
         }
     }
 
@@ -22,12 +22,10 @@ resource "google_compute_instance" "zookeeper" {
 
     metadata_startup_script =   <<EOF
 
-        apt-get -yq install gnupg curl dirmngr apt-transport-https
-        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
-        curl -O https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-2_all.deb
-        apt-get -y install ./zulu-repo_1.0.0-2_all.deb
-        apt-get update
-        apt-get -y install zulu11-jdk
+        apt install gnupg ca-certificates curl -y
+        curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
+        echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
+        apt update && apt install zulu17-jdk -y
 
         ZOOK_UID=10000
         ZOOK_GID=10000

@@ -31,7 +31,7 @@ resource "google_compute_instance" "nifi" {
         echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
 
         apt update && apt install unzip jq -y
-        apt install zulu17-jdk
+        apt install zulu17-jdk -y
 
         NIFI_UID=10000
         NIFI_GID=10000
@@ -87,6 +87,7 @@ resource "google_compute_instance" "nifi" {
         prop_replace 'nifi.security.user.oidc.discovery.url'        'https://accounts.google.com/.well-known/openid-configuration'      "$${NIFI_CONFIG_FILE}"
         prop_replace 'nifi.security.user.oidc.client.id'            '${var.oauth_clientid}'                                             "$${NIFI_CONFIG_FILE}"
         prop_replace 'nifi.security.user.oidc.client.secret'        '${var.oauth_secret}'                                               "$${NIFI_CONFIG_FILE}"
+        prop_replace 'nifi.security.user.oidc.additional.scopes'    ''                                                                  "$${NIFI_CONFIG_FILE}"
 
         prop_replace 'nifi.cluster.is.node'                         'true'                                                              "$${NIFI_CONFIG_FILE}"
         prop_replace 'nifi.cluster.protocol.is.secure'              'true'                                                              "$${NIFI_CONFIG_FILE}"

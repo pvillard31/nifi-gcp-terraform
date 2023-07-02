@@ -35,7 +35,7 @@ resource "google_compute_instance" "nifi-registry" {
         echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
 
         apt update && apt install unzip jq -y
-        apt install zulu17-jdk
+        apt install zulu17-jdk -y
 
         NIFIREGISTRY_UID=10000
         NIFIREGISTRY_GID=10000
