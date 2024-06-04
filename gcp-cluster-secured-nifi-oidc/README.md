@@ -1,6 +1,6 @@
  # Terraform on GCP - secured NiFi cluster with external ZooKeeper and secured NiFi Registry
 
-Step-by-step guide to start a secured NiFi cluster configured with OpenID Connect using Terraform on the Google Cloud Platform. Please refer to the [Medium post](https://medium.com/@pierre.villard/secured-nifi-cluster-with-terraform-on-the-google-cloud-platform-58c0ca6624d7) to get more details.
+Step-by-step guide to start a secured NiFi cluster configured with OpenID Connect using Terraform on the Google Cloud Platform. Please refer to this [post](https://github.com/pvillard31/my-blog/blob/main/2019/2019-11-22-secured-nifi-cluster-with-terraform-on-the-google-cloud-platform/index.md) to get more details.
 
 It will:
   * deploy a NiFi CA server as a convenient way to generate SSL certificates
@@ -18,7 +18,7 @@ cd nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc/
 
 Requirements:
   * you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment
-  * you need to have nifi-1.22.0-bin.zip, nifi-registry-1.22.0-bin.zip, nifi-toolkit-1.22.0-bin.zip and apache-zookeeper-3.8.1-bin.tar.gz in the configured GCS bucket
+  * you need to have nifi-2.0.0-M3-bin.zip, nifi-registry-2.0.0-M3-bin.zip, nifi-toolkit-1.26.0-bin.zip and apache-zookeeper-3.9.2-bin.tar.gz in the configured GCS bucket
 
 Variables to update in ``variables.tf`` **before**:
 

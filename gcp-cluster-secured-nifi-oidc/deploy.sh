@@ -1,5 +1,6 @@
 #!/bin/sh
 
+TOOLKIT_VERSION="1.26.0"
 PROJECT=$1
 BUCKET=$2
 
@@ -31,9 +32,9 @@ terraform apply -auto-approve
 gsutil cp gs://$BUCKET/keystore.jks .
 gsutil cp gs://$BUCKET/truststore.jks .
 gsutil cp gs://$BUCKET/config.json .
-gsutil cp gs://pvi-nifi/nifi-toolkit-1.22.0-bin.zip .
-unzip nifi-toolkit-1.22.0-bin.zip
-rm nifi-toolkit-1.22.0-bin.zip
+gsutil cp gs://pvi-nifi/nifi-toolkit-$TOOLKIT_VERSION-bin.zip .
+unzip nifi-toolkit-$TOOLKIT_VERSION-bin.zip
+rm nifi-toolkit-$TOOLKIT_VERSION-bin.zip
 
 echo "baseUrl=https://nifi.example.com/" > nifi-cli.properties
 echo "keystore=./keystore.jks" >> nifi-cli.properties
