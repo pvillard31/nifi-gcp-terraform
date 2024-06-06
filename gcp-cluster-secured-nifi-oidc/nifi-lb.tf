@@ -12,10 +12,14 @@ resource "google_compute_instance_group" "nifi-ig" {
     zone        = "${var.zone}"
 }
 
-resource "google_compute_https_health_check" "nifi-healthcheck" {
+resource "google_compute_health_check" "nifi-healthcheck" {
     name            = "nifi-healthcheck"
-    request_path    = "/"
-    port            = "8443"
+    timeout_sec        = 1
+    check_interval_sec = 30
+
+    tcp_health_check {
+      port = "8443"
+    }
 }
 
 resource "google_compute_backend_service" "nifi-backend" {
@@ -23,7 +27,7 @@ resource "google_compute_backend_service" "nifi-backend" {
     protocol            = "HTTPS"
     port_name           = "https"
     session_affinity    = "CLIENT_IP"
-    health_checks       = ["${google_compute_https_health_check.nifi-healthcheck.self_link}"]
+    health_checks       = ["${google_compute_health_check.nifi-healthcheck.self_link}"]
     backend {
         group           = "${google_compute_instance_group.nifi-ig.self_link}"
     }
