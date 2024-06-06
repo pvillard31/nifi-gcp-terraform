@@ -107,3 +107,19 @@ variable nifi_bucket {
 variable sensitivepropskey {
     description = "Key that will be used for encrypting the sensitive properties in the flow definition (ex: ThisIsAVeryBadPass3word)"
 }
+
+variable cloudflare_dns_api_token {
+	description = "Cloudflare DNS API Token for the Let's encrypt challenge when generating certificates"
+}
+
+variable cloudflare_api_key {
+	description = "Cloudflare API Key to update the DNS records"
+}
+
+variable cloudflare_zone_id {
+	description = "Cloudflare Zone ID for the DNS updates"
+}
+
+variable cloudflare_record_name {
+	description = "Cloudflare record name for NiFi"
+}
