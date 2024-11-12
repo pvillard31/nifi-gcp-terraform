@@ -18,7 +18,7 @@ cd nifi-gcp-terraform/gcp-cluster-secured-nifi-oidc/
 
 Requirements:
   * you need to have a file ``~/account.json`` with the key of the service account that will be used to perform the deployment
-  * you need to have nifi-2.0.0-M3-bin.zip, nifi-registry-2.0.0-M3-bin.zip, nifi-toolkit-1.26.0-bin.zip and apache-zookeeper-3.9.2-bin.tar.gz in the configured GCS bucket
+  * you need to have nifi-2.0.0-bin.zip, nifi-registry-2.0.0-bin.zip, nifi-toolkit-1.28.0-bin.zip and apache-zookeeper-3.9.3-bin.tar.gz in the configured GCS bucket
 
 Variables to update in ``variables.tf`` **before**:
 
